@@ -1,0 +1,1 @@
+**Sample API gateway config using nginx and sample API to test**
