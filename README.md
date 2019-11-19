@@ -20,7 +20,7 @@ etc/
     └── nginx.conf
 ```
 ```
-Test api_key protected API
+Test protected API
 ## curl -H "apikey: d2hvYW1pdGhlYmVzdHJhcHBlcg==" localhost/api/warehouse/hello
 {"message":"hello dude"}
 ```
