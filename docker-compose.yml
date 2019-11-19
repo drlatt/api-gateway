@@ -3,9 +3,19 @@ version: '2'
 services:
   api-gateway:
     container_name: api_gateway
-    restart: always
     build: 
       context: api_gateway/
+    environment: 
+      - SERVER_NAME_HELLO=192.168.0.202:8081
+      - NGINX_PORT=81
+    volumes: 
+      - ./api_gateway/templates/api_backends:/tmp/api_backends
+      - ./api_gateway/templates/api_gateway:/tmp/api_gateway
+    command: >
+      sh -c "envsubst '$$SERVER_NAME_HELLO' < /tmp/api_backends > /etc/nginx/api_backends.conf
+            envsubst '$$NGINX_PORT' < /tmp/api_gateway > /etc/nginx/api_gateway.conf
+            nginx -g 'daemon off;'"
+    restart: always
     ports: 
       - "80:81"
     networks: 
